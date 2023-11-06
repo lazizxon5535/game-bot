@@ -1,0 +1,163 @@
+from aiogram import Dispatcher,Bot,executor,types
+from asyncio import sleep
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.types import KeyboardButton,ReplyKeyboardMarkup,user
+
+bot = Bot(token="6727252933:AAHrdtRW7Fl590Z-o_kOZGwI6HiMblqTYW0")
+dp = Dispatcher(bot=bot)
+
+
+start_keybiard =ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton("Dice 🎲"),
+            KeyboardButton("Fodbool ⚽️"),
+            KeyboardButton("Basketbool 🏀"),
+        ],
+        [
+            KeyboardButton("Dart 🎯"),
+            KeyboardButton("Kazino 🎰"),
+            KeyboardButton("Bovling 🎳"),
+        ]
+    ],resize_keyboard=True
+)
+
+storage = MemoryStorage()
+dp = Dispatcher(bot=bot,storage=storage)
+
+@dp.message_handler(text="/start")
+async def cmd_export(message:types.Message):
+    await message.answer(f"Assalom aleykum {message.from_user.first_name}\nBotning menyusi", reply_markup=start_keybiard)
+
+@dp.message_handler(text="Dice 🎲")
+async def cmd_export(message:types.Message):
+    await sleep(1)
+    await message.answer("Men tashlayman!")
+    await sleep(0.5)
+    bot = await message.answer_dice()
+    bot = bot['dice']['value']
+    await sleep(3)
+    await message.answer("Sizni urningizga tashlayman!")
+    await sleep(0.2)
+    user = await message.answer_dice()
+    user = user['dice']['value']
+    await sleep(4)
+
+    if user > bot:
+        await message.answer("Siz yutdingiz!!")
+    elif user == bot:
+        await message.answer("Durang!")
+    else:
+        await message.answer("Men yutdim!")
+
+@dp.message_handler(text="Fodbool ⚽️")
+async def cmd_export(message:types.Message):
+    await sleep(1)
+    await message.answer("Men tashlayman!")
+    await sleep(0.5)
+    bot = await message.answer_dice("⚽️")
+    bot = bot['dice']['value']
+    await sleep(3)
+    await message.answer("Sizni urningizga tashlayman!")
+    await sleep(0.2)
+    user = await message.answer_dice("⚽️")
+    user = user['dice']['value']
+    await sleep(4)
+
+    if user > bot:
+        await message.answer("Siz yutdingiz!!")
+    elif user == bot:
+        await message.answer("Durang!")
+    else:
+        await message.answer("Men yutdim!")
+
+
+@dp.message_handler(text="Basketbool 🏀")
+async def cmd_eport(message:types.Message):
+    await sleep(1)
+    await message.answer("Men tashlayma!")
+    await sleep(0.5)
+    bot = await message.answer_dice("🏀")
+    bot = bot['dice']['value']
+    await sleep(3)
+    await message.answer("Sizni urnigizda tashlayman!!")
+    await sleep(0.2)
+    user = await message.answer_dice("🏀")
+    user = user ['dice']['value']
+    await sleep(4)
+
+    if user > bot:
+        await message.answer("Siz yutdingiz!!")
+    elif user == bot:
+        await message.answer("Durang")
+    else:
+        await message.answer("Men yutdim!")
+
+
+
+@dp.message_handler(text="Dart 🎯")
+async def cmd_export(message:types.Message):
+    await sleep(1)
+    await message.answer("Men tashlayma!")
+    await sleep(0.5)
+    bot = await message.answer_dice("🎯")
+    bot = bot['dice']['value']
+    await sleep(3)
+    await message.answer("Sizni urnigizda tashlayman!!")
+    await sleep(0.2)
+    user = await message.answer_dice("🎯")
+    user = user['dice']['value']
+    await sleep(4)
+
+    if user > bot:
+        await message.answer("Siz yutdingiz!!")
+    elif user == bot:
+        await message.answer("Durang")
+    else:
+        await message.answer("Men yutdim!")
+
+@dp.message_handler(text="Kazino 🎰")
+async def cmd_export(message:types.Message):
+    await sleep(1)
+    await message.answer("Men tashlayma!")
+    await sleep(0.5)
+    bot = await message.answer_dice("🎰")
+    bot = bot['dice']['value']
+    await sleep(3)
+    await message.answer("Sizni urnigizda tashlayman!!")
+    await sleep(0.2)
+    user = await message.answer_dice("🎰")
+    user = user ['dice']['value']
+    await sleep(4)
+
+    if user > bot:
+        await message.answer("Siz yutdingiz!!")
+    elif user == bot:
+        await message.answer("Durang")
+    else:
+        await message.answer("Men yutdim!")
+
+@dp.message_handler(text="Bovling 🎳")
+async def cmd_export(message:types.Message):
+    await sleep(1)
+    await message.answer("Men tashlayma!")
+    await sleep(0.5)
+    bot = await message.answer_dice("🎳")
+    bot = bot['dice']['value']
+    await sleep(3)
+    await message.answer("Sizni urnigizda tashlayman!!")
+    await sleep(0.2)
+    user = await message.answer_dice("🎳")
+    user = user ['dice']['value']
+    await sleep(4)
+
+    if user > bot:
+        await message.answer("Siz yutdingiz!!")
+    elif user == bot:
+        await message.answer("Durang")
+    else:
+        await message.answer("Men yutdim!")
+
+
+if __name__ == "__main__":
+    executor.start_polling(dp, skip_updates=True)
